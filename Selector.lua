@@ -204,7 +204,7 @@ submitBtn.MouseButton1Click:Connect(function()
 		UIListLayout.Parent = buttonFrame
 
 		local modes = {
-			{Name = "Altura Hub MM2", Script = "https://raw.githubusercontent.com/DatUnknownGuy/Altura-Hub/refs/heads/main/Altura%20HubMM2.lua"},
+			{Name = "Altura Hub MM2", Script = "https://raw.githubusercontent.com/Pxrson/Altura-Hub/refs/heads/main/Murder%20Mystery%202.lua"},
 			{Name = "Altura Hub ML", Script = "https://raw.githubusercontent.com/DatUnknownGuy/Altura-Hub/refs/heads/main/Altura%20HubML.lua"},
 			{Name = "Position Tracker", Script = "https://raw.githubusercontent.com/DatUnknownGuy/Selector/refs/heads/main/PositionTracker.lua"}
 		}
