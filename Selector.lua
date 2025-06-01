@@ -1,268 +1,126 @@
-local player = game.Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui", 10)
-if not playerGui then return end
+local StarterGui = game:GetService("StarterGui")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local gui = player:WaitForChild("PlayerGui")
 
-local keyGui = Instance.new("ScreenGui")
-keyGui.Name = "AlturaKeyGui"
-keyGui.ResetOnSpawn = false
-keyGui.IgnoreGuiInset = true
-keyGui.Parent = playerGui
+local function openKeyGui()
+	local mainGui = Instance.new("ScreenGui", gui)
+	mainGui.Name = "KeyPromptGui"
+	mainGui.ResetOnSpawn = false
 
-local keyFrame = Instance.new("Frame")
-keyFrame.Size = UDim2.new(0, 280, 0, 160)
-keyFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-keyFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-keyFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-keyFrame.BorderSizePixel = 0
-keyFrame.Active = true
-keyFrame.Parent = keyGui
+	local box = Instance.new("Frame", mainGui)
+	box.Size = UDim2.new(0, 260, 0, 140)
+	box.Position = UDim2.new(0.5, -130, 0.5, -70)
+	box.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	box.BorderSizePixel = 0
+	box.Active = true
+	Instance.new("UICorner", box).CornerRadius = UDim.new(0, 10)
 
-Instance.new("UICorner", keyFrame).CornerRadius = UDim.new(0, 12)
+	local title = Instance.new("TextLabel", box)
+	title.Size = UDim2.new(1, 0, 0, 25)
+	title.Position = UDim2.new(0, 0, 0, 5)
+	title.BackgroundTransparency = 1
+	title.Text = "Enter Key"
+	title.TextColor3 = Color3.new(1, 1, 1)
+	title.Font = Enum.Font.SourceSansBold
+	title.TextSize = 20
 
-local keyTitle = Instance.new("TextLabel")
-keyTitle.Size = UDim2.new(1, 0, 0, 30)
-keyTitle.Position = UDim2.new(0, 0, 0, 8)
-keyTitle.BackgroundTransparency = 1
-keyTitle.Text = "Enter Key"
-keyTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-keyTitle.Font = Enum.Font.GothamBold
-keyTitle.TextSize = 22
-keyTitle.Parent = keyFrame
+	local input = Instance.new("TextBox", box)
+	input.Size = UDim2.new(0, 220, 0, 30)
+	input.Position = UDim2.new(0.5, -110, 0, 40)
+	input.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	input.TextColor3 = Color3.new(1, 1, 1)
+	input.PlaceholderText = "Key here..."
+	input.Font = Enum.Font.SourceSans
+	input.TextSize = 16
+	Instance.new("UICorner", input).CornerRadius = UDim.new(0, 6)
 
-local keyInput = Instance.new("TextBox")
-keyInput.Size = UDim2.new(0, 240, 0, 30)
-keyInput.Position = UDim2.new(0.5, -120, 0, 50)
-keyInput.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-keyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
-keyInput.PlaceholderText = "Enter your key here..."
-keyInput.Font = Enum.Font.GothamMedium
-keyInput.TextSize = 16
-keyInput.Parent = keyFrame
-Instance.new("UICorner", keyInput).CornerRadius = UDim.new(0, 8)
+	local submit = Instance.new("TextButton", box)
+	submit.Size = UDim2.new(0, 220, 0, 30)
+	submit.Position = UDim2.new(0.5, -110, 0, 80)
+	submit.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+	submit.TextColor3 = Color3.new(1, 1, 1)
+	submit.Text = "Submit"
+	submit.Font = Enum.Font.SourceSans
+	submit.TextSize = 18
+	Instance.new("UICorner", submit).CornerRadius = UDim.new(0, 6)
 
-local submitBtn = Instance.new("TextButton")
-submitBtn.Size = UDim2.new(0, 240, 0, 30)
-submitBtn.Position = UDim2.new(0.5, -120, 0, 90)
-submitBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-submitBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-submitBtn.Text = "Submit"
-submitBtn.Font = Enum.Font.GothamMedium
-submitBtn.TextSize = 18
-submitBtn.Parent = keyFrame
-Instance.new("UICorner", submitBtn).CornerRadius = UDim.new(0, 8)
+	submit.MouseButton1Click:Connect(function()
+		if input.Text == "alturahubkey2025" then
+			mainGui:Destroy()
 
-local keyExitBtn = Instance.new("TextButton")
-keyExitBtn.Size = UDim2.new(0, 25, 0, 25)
-keyExitBtn.Position = UDim2.new(1, -30, 0, 5)
-keyExitBtn.BackgroundColor3 = Color3.fromRGB(180, 50, 50)
-keyExitBtn.Text = "X"
-keyExitBtn.TextColor3 = Color3.new(1, 1, 1)
-keyExitBtn.Font = Enum.Font.GothamBold
-keyExitBtn.TextSize = 14
-keyExitBtn.Parent = keyFrame
-Instance.new("UICorner", keyExitBtn).CornerRadius = UDim.new(0, 6)
+			local newGui = Instance.new("ScreenGui", gui)
+			newGui.Name = "ModeSelectorGui"
+			newGui.ResetOnSpawn = false
 
-local dragging = false
-local dragInput
-local dragStart
-local startPos
+			local frame = Instance.new("Frame", newGui)
+			frame.Size = UDim2.new(0, 250, 0, 250)
+			frame.Position = UDim2.new(0.5, -125, 0.5, -125)
+			frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+			frame.BorderSizePixel = 0
+			frame.Active = true
+			Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 10)
 
-local function updateInput(input)
-	local delta = input.Position - dragStart
-	keyFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+			local label = Instance.new("TextLabel", frame)
+			label.Size = UDim2.new(1, 0, 0, 25)
+			label.Position = UDim2.new(0, 0, 0, 5)
+			label.BackgroundTransparency = 1
+			label.Text = "Pick a Script"
+			label.TextColor3 = Color3.new(1, 1, 1)
+			label.Font = Enum.Font.SourceSansBold
+			label.TextSize = 20
+
+			local scripts = {
+				{"Altura MM2", "https://raw.githubusercontent.com/Pxrson/Altura-Hub/refs/heads/main/Murder%20Mystery%202.lua"},
+				{"Altura ML", "https://raw.githubusercontent.com/Pxrson/Altura-Hub/refs/heads/main/Muscle%20Legends.lua"},
+				{"Pos Tracker", "https://raw.githubusercontent.com/Pxrson/Pos-Tracker/refs/heads/main/Position%20Tracker.lua"},
+			}
+
+			local y = 40
+			for _, data in ipairs(scripts) do
+				local btn = Instance.new("TextButton", frame)
+				btn.Size = UDim2.new(0, 220, 0, 30)
+				btn.Position = UDim2.new(0.5, -110, 0, y)
+				btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+				btn.TextColor3 = Color3.new(1, 1, 1)
+				btn.Text = data[1]
+				btn.Font = Enum.Font.SourceSans
+				btn.TextSize = 16
+				Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+
+				btn.MouseButton1Click:Connect(function()
+					newGui:Destroy()
+					pcall(function()
+						local code = game:HttpGet(data[2])
+						loadstring(code)()
+					end)
+				end)
+
+				y = y + 35
+			end
+		else
+			input.Text = ""
+			input.PlaceholderText = "Wrong key!"
+			input.PlaceholderColor3 = Color3.fromRGB(255, 0, 0)
+		end
+	end)
 end
 
-keyFrame.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 then
-		dragging = true
-		dragStart = input.Position
-		startPos = keyFrame.Position
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				dragging = false
-			end
+local bindable = Instance.new("BindableFunction")
+bindable.OnInvoke = function(choice)
+	if choice == "Yeah, sure" then
+		pcall(function()
+			setclipboard("https://discord.gg/tAA9bzYyBx")
 		end)
 	end
-end)
+	openKeyGui()
+end
 
-keyFrame.InputChanged:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseMovement then
-		dragInput = input
-	end
-end)
-
-game:GetService("UserInputService").InputChanged:Connect(function(input)
-	if input == dragInput and dragging then
-		updateInput(input)
-	end
-end)
-
-keyExitBtn.MouseButton1Click:Connect(function()
-	keyGui:Destroy()
-end)
-
-submitBtn.MouseButton1Click:Connect(function()
-	if keyInput.Text == "alturahubkey2025" then
-		keyGui:Destroy()
-		local screenGui = Instance.new("ScreenGui")
-		screenGui.Name = "AlturaSelectorGui"
-		screenGui.ResetOnSpawn = false
-		screenGui.IgnoreGuiInset = true
-		screenGui.Parent = playerGui
-
-		local frame = Instance.new("Frame")
-		frame.Size = UDim2.new(0, 280, 0, 260)
-		frame.Position = UDim2.new(0.5, 0, 0.5, 0)
-		frame.AnchorPoint = Vector2.new(0.5, 0.5)
-		frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-		frame.BorderSizePixel = 0
-		frame.Active = true
-		frame.Parent = screenGui
-		Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
-
-		local selectorDragging = false
-		local selectorDragInput
-		local selectorDragStart
-		local selectorStartPos
-
-		local function updateSelectorInput(input)
-			local delta = input.Position - selectorDragStart
-			frame.Position = UDim2.new(selectorStartPos.X.Scale, selectorStartPos.X.Offset + delta.X, selectorStartPos.Y.Scale, selectorStartPos.Y.Offset + delta.Y)
-		end
-
-		frame.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 then
-				selectorDragging = true
-				selectorDragStart = input.Position
-				selectorStartPos = frame.Position
-				input.Changed:Connect(function()
-					if input.UserInputState == Enum.UserInputState.End then
-						selectorDragging = false
-					end
-				end)
-			end
-		end)
-
-		frame.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement then
-				selectorDragInput = input
-			end
-		end)
-
-		game:GetService("UserInputService").InputChanged:Connect(function(input)
-			if input == selectorDragInput and selectorDragging then
-				updateSelectorInput(input)
-			end
-		end)
-
-		local title = Instance.new("TextLabel")
-		title.Size = UDim2.new(1, 0, 0, 30)
-		title.Position = UDim2.new(0, 0, 0, 8)
-		title.BackgroundTransparency = 1
-		title.Text = "Select a Mode"
-		title.TextColor3 = Color3.fromRGB(255, 255, 255)
-		title.Font = Enum.Font.GothamBold
-		title.TextSize = 22
-		title.Parent = frame
-
-		local subtitle = Instance.new("TextLabel")
-		subtitle.Size = UDim2.new(1, 0, 0, 20)
-		subtitle.Position = UDim2.new(0, 0, 0, 35)
-		subtitle.BackgroundTransparency = 1
-		subtitle.Text = "by pxrson"
-		subtitle.TextColor3 = Color3.fromRGB(180, 180, 180)
-		subtitle.Font = Enum.Font.Gotham
-		subtitle.TextSize = 14
-		subtitle.Parent = frame
-
-		local exitBtn = Instance.new("TextButton")
-		exitBtn.Size = UDim2.new(0, 25, 0, 25)
-		exitBtn.Position = UDim2.new(1, -30, 0, 5)
-		exitBtn.BackgroundColor3 = Color3.fromRGB(180, 50, 50)
-		exitBtn.Text = "X"
-		exitBtn.TextColor3 = Color3.new(1, 1, 1)
-		exitBtn.Font = Enum.Font.GothamBold
-		exitBtn.TextSize = 14
-		exitBtn.Parent = frame
-		Instance.new("UICorner", exitBtn).CornerRadius = UDim.new(0, 6)
-
-		exitBtn.MouseButton1Click:Connect(function()
-			screenGui:Destroy()
-		end)
-
-		local buttonFrame = Instance.new("Frame")
-		buttonFrame.Size = UDim2.new(1, 0, 1, -70)
-		buttonFrame.Position = UDim2.new(0, 0, 0, 60)
-		buttonFrame.BackgroundTransparency = 1
-		buttonFrame.Parent = frame
-
-		local UIListLayout = Instance.new("UIListLayout")
-		UIListLayout.Padding = UDim.new(0, 10)
-		UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-		UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout.Parent = buttonFrame
-
-		local modes = {
-			{Name = "Altura Hub MM2", Script = "https://raw.githubusercontent.com/Pxrson/Altura-Hub/refs/heads/main/Murder%20Mystery%202.lua"},
-			{Name = "Altura Hub ML", Script = "https://raw.githubusercontent.com/Pxrson/Altura-Hub/refs/heads/main/Muscle%20Legends.lua"},
-			{Name = "Position Tracker", Script = "https://raw.githubusercontent.com/Pxrson/Pos-Tracker/refs/heads/main/Position%20Tracker.lua"}
-		}
-
-		for _, mode in ipairs(modes) do
-			local button = Instance.new("TextButton")
-			button.Size = UDim2.new(0, 240, 0, 35)
-			button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-			button.TextColor3 = Color3.fromRGB(255, 255, 255)
-			button.Text = mode.Name
-			button.Font = Enum.Font.GothamMedium
-			button.TextSize = 18
-			button.Parent = buttonFrame
-			Instance.new("UICorner", button).CornerRadius = UDim.new(0, 8)
-
-			button.MouseEnter:Connect(function()
-				button.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-			end)
-
-			button.MouseLeave:Connect(function()
-				button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-			end)
-
-			button.MouseButton1Click:Connect(function()
-				screenGui:Destroy()
-				local success, err = pcall(function()
-					local source = game:HttpGet(mode.Script)
-					loadstring(source)()
-				end)
-			end)
-		end
-
-		local discordButton = Instance.new("TextButton")
-		discordButton.Size = UDim2.new(0, 240, 0, 35)
-		discordButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-		discordButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-		discordButton.Text = "Copy Discord Invite Link"
-		discordButton.Font = Enum.Font.GothamMedium
-		discordButton.TextSize = 18
-		discordButton.Parent = buttonFrame
-		Instance.new("UICorner", discordButton).CornerRadius = UDim.new(0, 8)
-
-		discordButton.MouseEnter:Connect(function()
-			discordButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-		end)
-
-		discordButton.MouseLeave:Connect(function()
-			discordButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-		end)
-
-		discordButton.MouseButton1Click:Connect(function()
-			pcall(function()
-				setclipboard("https://discord.gg/tAA9bzYyBx")
-			end)
-		end)
-	else
-		keyInput.Text = ""
-		keyInput.PlaceholderText = "Invalid key!"
-		keyInput.PlaceholderColor3 = Color3.fromRGB(255, 50, 50)
-	end
-end)
+StarterGui:SetCore("SendNotification", {
+	Title = "Want to join the Discord and support us?",
+	Text = "Click a button below.",
+	Duration = 10,
+	Callback = bindable,
+	Button1 = "Yeah, sure",
+	Button2 = "No, fuck you"
+})
