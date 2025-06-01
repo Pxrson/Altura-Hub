@@ -217,8 +217,7 @@ local function openModeSelector()
 	label.TextStrokeColor3 = Color3.new(0, 0, 0)
 
 	local scripts = {
-		{"🔫 Altura MM2", "https://raw.githubusercontent.com/Pxrson/Altura-Hub/refs/heads/main/Murder%20Mystery%202.lua", Color3.fromRGB(220, 20, 60)},
-		{"💪 Altura ML", "https://raw.githubusercontent.com/Pxrson/Altura-Hub/refs/heads/main/Muscle%20Legends.lua", Color3.fromRGB(50, 205, 50)},
+		{"🗡️ Altura MM2", "https://raw.githubusercontent.com/Pxrson/Altura-Hub/refs/heads/main/Murder%20Mystery%202.lua", Color3.fromRGB(220, 20, 60)},
 		{"📍 Pos Tracker", "https://raw.githubusercontent.com/Pxrson/Pos-Tracker/refs/heads/main/Position%20Tracker.lua", Color3.fromRGB(255, 165, 0)},
 	}
 
